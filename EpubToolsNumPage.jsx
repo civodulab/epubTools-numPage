@@ -40,8 +40,6 @@ function bouclePage() {
                 if (items[j].parent.constructor.name === "Spread") {
                     if (items[j].contents !== ""&&(items[j].nextTextFrame||items[j].previousTextFrame)) {
                         myObjectList.push(items[j]);
-                        $.write(items[j]);
-                        // items[j].select();
                     }
                 }
             }
@@ -58,7 +56,6 @@ function myOrderTextFrame(myObjectList, numPage) {
     myObjectList.sort(mySortByTextFramePosition);
     var myTextFrame = myObjectList[0];
     try {
-        // anchoredFrame(myTextFrame, numPage);
         insertionPage(myTextFrame, numPage);
     }
     catch (err) {
@@ -75,8 +72,6 @@ function insertionPage(myTextFrame, numPage) {
     myInsertionPoint.contents = "" + numPage;
     myInsertionPoint.applyCharacterStyle(myCharacterStyle, true);
     myInsertionPoint.applyConditions(maCD, true);
-    // myTextFrame.parentStory.insertionPoints.item(-1).contents = "Not equal to";
-    // myTextFrame.parentStory.characters.item(0).applyCharacterStyle(myCharacterStyle, true);
 }
 
 function mySortByTextFramePosition(a, b) {
