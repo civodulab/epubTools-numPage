@@ -38,8 +38,9 @@ function bouclePage() {
         if (items.length !== 0) {
             for (var j = 0; j < items.length; j++) {
                 if (items[j].parent.constructor.name === "Spread") {
-                    if (items[j].contents !== "") {
+                    if (items[j].contents !== ""&&(items[j].nextTextFrame||items[j].previousTextFrame)) {
                         myObjectList.push(items[j]);
+                        $.write(items[j]);
                         // items[j].select();
                     }
                 }
