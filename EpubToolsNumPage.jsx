@@ -4,8 +4,42 @@ var cdName = "epubTools-numPage",
     doc = app.activeDocument,
     pages = doc.pages;
 
-testCondition();
-bouclePage();
+
+dialogInterface();
+
+
+function dialogInterface() {
+    var myDialog = app.dialogs.add({ name: "Numérotation EPUB" });
+    //Add a dialog column.
+    var maColonne = myDialog.dialogColumns.add();
+
+    with (maColonne) {
+        //Create a border panel.
+        with (borderPanels.add()) {
+            with (dialogColumns.add()) {
+                staticTexts.add({ staticLabel: "Début de la numérotation:", minWidth: 170 });
+            }
+            with (dialogColumns.add()) {
+                var debutNum = integerEditboxes.add({ editValue: 1, minWidth: 30 });
+            }
+        }
+        with (borderPanels.add()) {
+            with (dialogColumns.add()) {
+                staticTexts.add({ staticLabel: "Début de la première page:", minWidth: 170 });
+            }
+            with (dialogColumns.add()) {
+                var debutPage = integerEditboxes.add({ editValue: 1, minWidth: 30 });
+            }
+        }
+    }
+
+    var myResult = myDialog.show();
+    if (myResult == true) {
+        testCondition();
+        bouclePage(debutNum.editValue, debutPage.editValue);
+    }
+    myDialog.destroy();
+}
 
 
 function testCondition() {
@@ -16,38 +50,37 @@ function testCondition() {
     app.activeDocument.conditions.item(cdName).visible = false;
     try {
         myCharacterStyle = app.activeDocument.characterStyles.item(stylePN);
-        //If the style does not exist, trying to get its name will generate an error.
         myName = myCharacterStyle.name;
     }
     catch (myError) {
-        //The style did not exist, so create it.
         myCharacterStyle = app.activeDocument.characterStyles.add({ name: stylePN });
     }
 
 }
 
-function bouclePage() {
+function bouclePage(debutNum, debutPage) {
     var w = new Window('palette', 'Ajout pages noire');
     w.pbar = w.add('progressbar', undefined, 0, pages.length);
     w.pbar.preferredSize.width = 300;
     w.show();
-    for (var i = 0; i < pages.length; i++) {
+    for (var i = debutPage - 1; i < pages.length; i++) {
 
         var myObjectList = new Array;
         var items = pages[i].textFrames;
         if (items.length !== 0) {
             for (var j = 0; j < items.length; j++) {
                 if (items[j].parent.constructor.name === "Spread") {
-                    if (items[j].contents !== ""&&(items[j].nextTextFrame||items[j].previousTextFrame)) {
+                    if (items[j].contents !== "" && (items[j].nextTextFrame || items[j].previousTextFrame)) {
                         myObjectList.push(items[j]);
                     }
                 }
             }
             if (myObjectList.length !== 0) {
-                myOrderTextFrame(myObjectList, i + 1);
+                myOrderTextFrame(myObjectList, (debutNum));
             }
         }
         w.pbar.value = i;
+        debutNum++;
     }
 }
 
