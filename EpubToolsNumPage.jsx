@@ -8,6 +8,8 @@ var cdName = "epubTools-numPage",
 dialogInterface();
 
 
+
+
 function dialogInterface() {
     var myDialog = app.dialogs.add({ name: "Numérotation EPUB" });
     //Add a dialog column.
@@ -35,10 +37,24 @@ function dialogInterface() {
 
     var myResult = myDialog.show();
     if (myResult == true) {
+        supprimeNum();
         testCondition();
         bouclePage(debutNum.editValue, debutPage.editValue);
     }
     myDialog.destroy();
+}
+
+
+function supprimeNum() {
+    app.findTextPreferences = NothingEnum.nothing;
+    app.changeTextPreferences = NothingEnum.nothing;
+    app.activeDocument.conditions.item(cdName).visible = true;
+    app.findTextPreferences.appliedConditions = [cdName];
+    app.activeDocument.changeText();
+    app.findTextPreferences = NothingEnum.nothing;
+    app.changeTextPreferences = NothingEnum.nothing;
+    app.activeDocument.conditions.item(cdName).visible = false;
+
 }
 
 
