@@ -37,9 +37,9 @@ function dialogInterface() {
 
     var myResult = myDialog.show();
     if (myResult == true) {
-        supprimeNum();
-        testCondition();
-        bouclePage(debutNum.editValue, debutPage.editValue);
+       testCondition();
+       supprimeNum();
+       bouclePage(debutNum.editValue, debutPage.editValue);
     }
     myDialog.destroy();
 }
@@ -67,9 +67,11 @@ function testCondition() {
     try {
         myCharacterStyle = app.activeDocument.characterStyles.item(stylePN);
         myName = myCharacterStyle.name;
+         myCharacterStyle.pointSize=0.1;
     }
     catch (myError) {
         myCharacterStyle = app.activeDocument.characterStyles.add({ name: stylePN });
+        myCharacterStyle.pointSize=0.1;
     }
 
 }
