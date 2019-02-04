@@ -4,11 +4,7 @@ var cdName = "epubTools-numPage",
     doc = app.activeDocument,
     pages = doc.pages;
 
-
 dialogInterface();
-
-
-
 
 function dialogInterface() {
     var myDialog = app.dialogs.add({ name: "Numérotation EPUB" });
@@ -37,9 +33,9 @@ function dialogInterface() {
 
     var myResult = myDialog.show();
     if (myResult == true) {
-       testCondition();
-       supprimeNum();
-       bouclePage(debutNum.editValue, debutPage.editValue);
+        testCondition();
+        supprimeNum();
+        bouclePage(debutNum.editValue, debutPage.editValue);
     }
     myDialog.destroy();
 }
@@ -54,9 +50,7 @@ function supprimeNum() {
     app.findTextPreferences = NothingEnum.nothing;
     app.changeTextPreferences = NothingEnum.nothing;
     app.activeDocument.conditions.item(cdName).visible = false;
-
 }
-
 
 function testCondition() {
     if (!app.activeDocument.conditions.item(cdName).isValid) {
@@ -67,17 +61,17 @@ function testCondition() {
     try {
         myCharacterStyle = app.activeDocument.characterStyles.item(stylePN);
         myName = myCharacterStyle.name;
-         myCharacterStyle.pointSize=0.1;
+
     }
     catch (myError) {
         myCharacterStyle = app.activeDocument.characterStyles.add({ name: stylePN });
-        myCharacterStyle.pointSize=0.1;
     }
-
+    myCharacterStyle.pointSize = 0.1;
+    myCharacterStyle.styleExportTagMaps.add({ exportType: "EPUB", exportTag: "span", exportClass: "epubTools-numPage", exportAttributes: "" });
 }
 
 function bouclePage(debutNum, debutPage) {
-    var w = new Window('palette', 'Ajout pages noire');
+    var w = new Window('palette', 'Ajout pages noir');
     w.pbar = w.add('progressbar', undefined, 0, pages.length);
     w.pbar.preferredSize.width = 300;
     w.show();
@@ -112,7 +106,6 @@ function myOrderTextFrame(myObjectList, numPage) {
     catch (err) {
         alert("Erreur page " + numPage);
     }
-
 }
 
 function insertionPage(myTextFrame, numPage) {
