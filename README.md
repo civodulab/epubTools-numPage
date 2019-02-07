@@ -21,12 +21,10 @@ Les pages apparaîtront dans l'EPUB sous la forme :
 <span class="epubTools-numPage-style">{numéro}</span>
 ```
 
-Une fois l'EPUB créé, décompresser-le.
+Une fois l'EPUB créé, décompressez-le.
 
 - Avec Vscode et le plugin [EpubTools](https://github.com/civodulab/epubtools) installé vous pourrez convertir les span en :
-
     ```xhtml
     <span id="page{numéro}" title="{numéro}" epub:type="pagebreak" role="doc-pagebreak"></span>
     ```
-    
 - Sinon, avec un autre éditeur faite un recherche/remplace.
