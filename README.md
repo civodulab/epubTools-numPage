@@ -33,6 +33,6 @@ Une fois l'EPUB créé, décompressez-le.
     ```xhtml
     <span id="page{numéro}" title="{numéro}" epub:type="pagebreak" role="doc-pagebreak"></span>
     ```
-    en utilisant la commande `EpubTools: A11Y` puis `DPub-Aria roles|epub:type`.
+    en utilisant la commande `EpubTools : <span...>{numPage}</span> => <span {epub:type} />`.
     
 - Avec un autre éditeur faites un recherche/remplace.
