@@ -38,6 +38,6 @@ Unzip the EPUB and do replacements:
     ```xhtml
     <span id="page{number}" title="{number}" epub:type="pagebreak" role="doc-pagebreak"></span>
     ```
-    Use `EpubTools: A11Y` then `DPub-Aria roles|epub:type` commands.
+    Use `EpubTools : <span...>{numPage}</span> => <span {epub:type} />` commands.
     
 - With another editor, do a search/replace with Regex.
