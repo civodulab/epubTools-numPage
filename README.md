@@ -1,14 +1,18 @@
 # epubTools-numPage
 
-Script InDesign qui insère les numéros des pages pour l'export en EPUB.
+Script InDesign qui insère les numéros de pages pour l'export en EPUB.
+
+## Application
+
+- Tous les documents ouverts.
+- Tous les livres ouverts.
+
 
 ## Mode d'emploi
 
 Le script crée un "Texte conditionnel" `epubTools-numPage` et un "Style de caractère" `epubTools-numPage-style`.
 
 Le texte conditionnel est placé au début du premier bloc de texte dans la page (celui qui a la position la plus haute dans la page).
-
-> ![Capture d'écran : boîte de dialogue du script](/images/Boite_du_script.PNG)
 
 Utilisez le mode d'affichage normal (`Affichage > Mode de l'écran > normal`) puis affichez les caractères masqués (`Texte > Afficher les caractères masqués`)
 > ![Aperçu du texte conditionnel non visible](/images/Apercu_TexteConditionnel.PNG)
@@ -36,3 +40,7 @@ Une fois l'EPUB créé, décompressez-le.
     en utilisant la commande `EpubTools : <span...>{numPage}</span> => <span {epub:type} />`.
     
 - Avec un autre éditeur faites un recherche/remplace.
+
+## Dernière version
+
+- S'applique sur un livre.
